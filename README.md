@@ -1,35 +1,42 @@
+
 # Skin Disease Classification Using Transfer Learning in Convolutional Neural Networks
 
 ## Overview
 This project focuses on the automated classification of various skin diseases using deep learning techniques, specifically Convolutional Neural Networks (CNNs). By leveraging transfer learning, the system aims to enhance diagnostic support in clinical dermatology, providing accurate and reliable assessments of skin conditions such as eczema, psoriasis, and melanoma.
+
+The project utilizes pre-trained models like ResNet50, InceptionV3, and EfficientNetV2S, fine-tuned on a comprehensive dataset of skin conditions. The solution includes a user-friendly Gradio interface for image uploads and predictions.
 
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Model Training](#model-training)
+  - [Data Preprocessing](#data-preprocessing)
+  - [Transfer Learning](#transfer-learning)
+  - [Training Process](#training-process)
 - [Results](#results)
+  - [Model Performance](#model-performance)
+  - [Classification Metrics](#classification-metrics)
 - [Future Work](#future-work)
 - [License](#license)
+- [Acknowledgments](#acknowledgments)
 
 ## Installation
-To run this project, you need to have Python 3.x installed along with the following libraries:
-- TensorFlow
-- Keras
-- NumPy
-- Matplotlib
-- Gradio
-- scikit-learn
+To run this project, you need to have Python 3.8 or higher installed along with the following libraries:
 
-You can install the required libraries using pip:
 ```bash
-pip install tensorflow keras numpy matplotlib gradio scikit-learn
+pip install tensorflow==2.10.0 keras numpy matplotlib gradio scikit-learn
 ```
 
+### Additional Requirements
+- Kaggle API for dataset download
+- Google Colab or Jupyter Notebook for model training
+- Gradio for the web interface
+
 ## Usage
-1. **Upload your Kaggle API key**: 
-   - Upload the `kaggle.json` file to authenticate and download datasets.
-   
+1. **Upload your Kaggle API key**:
+   - Create a `kaggle.json` file and upload it to authenticate and download datasets.
+
 2. **Download the Dataset**:
    - The dataset can be downloaded from Kaggle using the Kaggle API.
 
@@ -38,6 +45,23 @@ pip install tensorflow keras numpy matplotlib gradio scikit-learn
 
 4. **Gradio Interface**:
    - The project includes a Gradio interface that allows users to upload skin images and receive predictions on the skin condition.
+
+### Example Usage
+```python
+# Example prediction using the Gradio interface
+def predict(img):
+    img = img.resize((299, 299))  # Resize image for EfficientNet input
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array = preprocess_effnet(img_array)  # Preprocess image
+
+    preds = model.predict(img_array)
+    pred_index = np.argmax(preds)
+    pred_class = CLASS_NAMES[pred_index]
+    confidence = preds[0][pred_index]
+
+    return f"{pred_class} ({confidence:.2%} confidence)"
+```
 
 ## Project Structure
 ```
@@ -50,19 +74,26 @@ pip install tensorflow keras numpy matplotlib gradio scikit-learn
 │   └── resnet_model.h5
 ├── notebooks/
 │   └── skin_disease_classification.ipynb
-└── requirements.txt
+├── requirements.txt
+└── LICENSE
 ```
 
 ## Model Training
-The project utilizes several pre-trained models including:
-- ResNet50
-- InceptionV3
-- EfficientNetV2S
+The project utilizes several pre-trained models including ResNet50, InceptionV3, and EfficientNetV2S. The models are fine-tuned on a dataset of skin diseases to adapt to the specific classification task.
+
+### Data Preprocessing
+- **Data Augmentation**: Techniques like rotation, flipping, zooming, and shearing are applied to increase dataset diversity.
+- **Normalization**: Images are normalized using the preprocessing functions from the respective pre-trained models.
+
+### Transfer Learning
+- **Base Models**: Pre-trained models are used as feature extractors.
+- **Custom Layers**: Additional layers are added on top of the base models to adapt to the skin disease classification task.
 
 ### Training Process
-- The models are trained using the `ImageDataGenerator` for data augmentation.
-- Class weights are computed to handle class imbalance.
-- Early stopping and learning rate reduction callbacks are used to optimize training.
+- **ImageDataGenerator**: Used for data augmentation and batch processing.
+- **Class Weights**: Computed to handle class imbalance.
+- **Early Stopping**: Implemented to prevent overfitting.
+- **Learning Rate Reduction**: Applied to optimize training.
 
 ### Example Code Snippet
 ```python
@@ -87,6 +118,15 @@ model.fit(train_generator, validation_data=val_generator, epochs=60, class_weigh
 ## Results
 The models achieved high accuracy in classifying skin diseases, with the ensemble method yielding the best performance. The results include metrics such as accuracy, precision, recall, and F1-score.
 
+### Model Performance
+- **EfficientNetV2S**: Test Accuracy: 0.3338, Loss: 2.2931
+- **ResNet50**: Test Accuracy: 0.4029, Loss: 2.1242
+
+### Classification Metrics
+- **Precision**: Measures the proportion of true positives among all positive predictions.
+- **Recall**: Measures the proportion of true positives among all actual positive instances.
+- **F1-Score**: Harmonic mean of precision and recall.
+
 ### Example Output
 ```
 EfficientNetV2 Test Accuracy: 0.3338, Loss: 2.2931
@@ -96,10 +136,16 @@ Classification Report:
 ```
 
 ## Future Work
-- Expand the dataset to include more diverse skin tones and conditions.
-- Integrate the model into clinical workflows via APIs.
-- Implement longitudinal tracking for monitoring skin conditions over time.
+- **Expand Dataset**: Include more diverse skin tones and conditions.
+- **Clinical Integration**: Develop APIs for integration into clinical workflows.
+- **Longitudinal Tracking**: Implement tracking to monitor skin conditions over time.
+- **Model Optimization**: Explore quantization and pruning for deployment on edge devices.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
-```
+
+## Acknowledgments
+- **Kaggle Dataset**: The dataset used in this project is from [Kaggle](https://www.kaggle.com/datasets/shubhamgoel27/dermnet).
+- **Pre-trained Models**: The project leverages pre-trained models from TensorFlow Applications.
+- **Gradio**: The web interface is built using Gradio for easy interaction.
+
