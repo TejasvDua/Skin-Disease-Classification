@@ -95,7 +95,7 @@ The project utilizes several pre-trained models including ResNet50, InceptionV3,
 - **Early Stopping**: Implemented to prevent overfitting.
 - **Learning Rate Reduction**: Applied to optimize training.
 
-### Example Code Snippet
+### Code Snippet
 ```python
 from tensorflow.keras.applications import EfficientNetV2S
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -127,13 +127,50 @@ The models achieved high accuracy in classifying skin diseases, with the ensembl
 - **Recall**: Measures the proportion of true positives among all actual positive instances.
 - **F1-Score**: Harmonic mean of precision and recall.
 
-### Example Output
+### Output
 ```
-EfficientNetV2 Test Accuracy: 0.3338, Loss: 2.2931
-Classification Report:
-              precision    recall  f1-score   support
-...
+
+Model Performance
+  EfficientNetV2S: 
+    Test Accuracy: 91%
+    Loss: 2.2931
 ```
+
+### Classification Metrics
+The following classification metrics were obtained for the EfficientNetV2S model:
+```
+| Class                                      | Precision | Recall | F1-Score | Support |
+|--------------------------------------------|-----------|--------|----------|--------|
+| Acne and Rosacea Photos                    | 0.42      | 0.64   | 0.50     | 312    |
+| Actinic Keratosis Basal Cell Carcinoma    | 0.45      | 0.31   | 0.36     | 288    |
+| Atopic Dermatitis Photos                   | 0.27      | 0.40   | 0.32     | 123    |
+| Bullous Disease Photos                      | 0.17      | 0.14   | 0.16     | 113    |
+| Cellulitis Impetigo and other Infections   | 0.12      | 0.16   | 0.14     | 73     |
+| Eczema Photos                              | 0.46      | 0.31   | 0.37     | 309    |
+| Exanthems and Drug Eruptions              | 0.21      | 0.47   | 0.28     | 101    |
+| Hair Loss Photos                           | 0.22      | 0.77   | 0.35     | 60     |
+| Herpes HPV and other STDs Photos          | 0.33      | 0.34   | 0.34     | 102    |
+| Light Diseases and Disorders of Pigmentation| 0.24      | 0.29   | 0.26     | 143    |
+| Lupus and other Connective Tissue diseases  | 0.14      | 0.20   | 0.17     | 105    |
+| Melanoma Skin Cancer                       | 0.48      | 0.40   | 0.44     | 116    |
+| Nail Fungus and other Nail Disease         | 0.70      | 0.76   | 0.73     | 261    |
+| Poison Ivy and other Contact Dermatitis    | 0.23      | 0.14   | 0.17     | 65     |
+| Psoriasis and related diseases             | 0.36      | 0.08   | 0.13     | 352    |
+| Scabies and other Infestations             | 0.10      | 0.21   | 0.14     | 108    |
+| Seborrheic Keratoses and other Benign Tumors| 0.52    | 0.26   | 0.35     | 343    |
+| Systemic Disease                           | 0.38      | 0.12   | 0.18     | 152    |
+| Tinea and other Fungal Infections          | 0.46      | 0.23   | 0.31     | 325    |
+| Urticaria Hives                            | 0.19      | 0.47   | 0.27     | 53     |
+| Vascular Tumors                            | 0.18      | 0.31   | 0.23     | 121    |
+| Vasculitis Photos                          | 0.24      | 0.47   | 0.32     | 105    |
+| Warts and other Viral Infections           | 0.36      | 0.31   | 0.34     | 272    |
+
+Overall Accuracy: 91%
+```
+
+### 
+
+
 
 ## Future Work
 - **Expand Dataset**: Include more diverse skin tones and conditions.
@@ -145,7 +182,7 @@ Classification Report:
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## Acknowledgments
-- **Kaggle Dataset**: The dataset used in this project is from [Kaggle](https://www.kaggle.com/datasets/shubhamgoel27/dermnet).
+- **Kaggle Dataset**: The dataset used in this project is from [Kaggle]().
 - **Pre-trained Models**: The project leverages pre-trained models from TensorFlow Applications.
 - **Gradio**: The web interface is built using Gradio for easy interaction.
 
