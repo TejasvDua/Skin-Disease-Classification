@@ -179,7 +179,7 @@ Overall Accuracy: 91%
 - **Model Optimization**: Explore quantization and pruning for deployment on edge devices.
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the GNU Affero General Public License v3.0 License. See the LICENSE file for more details.
 
 ## Acknowledgments
 - **Kaggle Dataset**: The dataset used in this project is from [Kaggle]().
